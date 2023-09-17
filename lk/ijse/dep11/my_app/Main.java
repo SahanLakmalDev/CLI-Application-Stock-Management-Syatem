@@ -1,6 +1,8 @@
 package lk.ijse.dep11.my_app;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -116,7 +118,7 @@ public class Main {
             case 1:
                 changeTheCredentials();
             case 2:
-                //supplierManage();
+                supplierManage();
             case 3:
                 //stockManage();
             case 4:
@@ -204,7 +206,170 @@ public class Main {
         }
     
     }
+    public static void supplierManage(){
+        clearConsole();
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                             SUPPLIER MANAGE                               |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        System.out.printf("%-48s%-48s\n", "[1] Add supplier", "[2] Update supplier");
+        System.out.printf("%-48s%-48s\n", "[3] Delete supplier", "[4] View suppliers");
+        System.out.printf("%-48s%-48s\n", "[5] Search supplier", "[6] Home Page");
+
+        String option;
+        int choice = 0;
+        boolean valid;
+        do{
+            valid = true;
+            System.out.print("\nEnter an Option to continue : ");
+            option = scan.nextLine().strip();
+
+            try{
+                if(option.isBlank()){
+                    System.out.printf(ERROR_MSG, "Option can't be empty");
+                    valid = false;
+                    continue; 
+                }
+                choice = Integer.parseInt(option);
+                if(choice < 0 || choice > 6){
+                    System.out.printf(ERROR_MSG, "Invalid Option, Try again");
+                    valid = false;
+                    continue;
+                }
+
+            }catch (NumberFormatException nfe){
+                System.out.printf(ERROR_MSG, "Please enter a number");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        switch (choice) {
+            case 1:
+                addSupplier();
+            case 2:
+                updateSupplier();
+            case 3:
+                deleteSupplier();
+            case 4:
+                viewSuppliers();
+            case 5:
+                //searchSupplier();
+            case 6:
+                homepage();
+        }
+
+        
+
+    }
+    public static void homepage(){
+        clearConsole();
+        dashboard();
+    }
+
+    public static void addSupplier(){
+
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                                ADD SUPPLIER                               |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        String supplier_id = idValidationAdding();
+        boolean valid;
+        String supplier_name;
+        do{
+            valid = true;
+            System.out.print("Enter Supiler name : ");
+            supplier_name= scan.nextLine().strip();
+
+            if(supplier_name.isBlank()){
+                System.out.printf(ERROR_MSG, "Supplier Name can't be empty");
+                valid = false;
+                continue;
+            }
+
+        }while(!valid);
+
+        supplier_array = extendSupplierArray(supplier_array, supplier_id, supplier_name);
+
+        System.out.print("Added successfully! Do you want to add another supplier (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+            addSupplier();
+        }else{
+            supplierManage();
+        }
+
+
+
+
+    }
+    public static void updateSupplier(){
+
+        clearConsole();
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                              UPDATE SUPPLIER                              |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+
+    }
+    public static void viewSuppliers(){
+
+    }
+    public static void deleteSupplier(){
+
+    }
+
+    public static String idValidationAdding(){
+        boolean valid;
+        String value;
+
+        do{
+
+            valid = true;
+            System.out.print("Enter supplier ID : ");
+            value = scan.nextLine().strip();
+
+            if(value.isBlank()){
+                System.out.printf(ERROR_MSG, "ID can't be empty");
+                valid = false;
+                continue;
+            }
+            Pattern pattern = Pattern.compile("S-\\d{3}");
+            Matcher matcher = pattern.matcher(value);
+            if(!matcher.matches()){
+                System.out.printf(ERROR_MSG,"Invalid Supplier ID format");
+                valid = false;
+                continue;
+            }
+            for(int i = 0; i< supplier_array.length; i++){
+                if(supplier_array[i][0].equals(value)){
+                    System.out.printf(ERROR_MSG,"ID already exists");
+                    valid = false;
+                    break;
+                }
+            }
+        }while(!valid);
+        return value;
+
+    }
+
+    public static String[][] extendSupplierArray(String[][] input, String id, String name){
+        String[][] temp = new String[input.length + 1][2];
+
+        for (int i = 0; i < input.length; i++) {
+            temp[i] = input[i];
+        }
+        temp[temp.length -1][0] = id;
+        temp[temp.length -1][1] = name;
+        input = temp;
+        return input;
+    }
     
+
 
 
 

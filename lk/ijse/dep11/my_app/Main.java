@@ -540,7 +540,7 @@ public class Main {
                     continue; 
                 }
                 choice = Integer.parseInt(option);
-                if(choice < 0 || choice > 5){
+                if(choice < 0 || choice > 6){
                     System.out.printf(ERROR_MSG, "Invalid Option, Try again");
                     valid = false;
                     continue;
@@ -568,7 +568,7 @@ public class Main {
                 homepage();
         }
     }
-
+   
     public static void manageItemCategories(){
 
         clearConsole();
@@ -630,6 +630,33 @@ public class Main {
         System.out.println("|                           UPDATE ITEM CATEGORY                            |");
         System.out.println("+---------------------------------------------------------------------------+\n");
 
+        String category_name = catValidationexists();
+        boolean valid;
+        String newCatagoryName;
+        do{
+            valid = true;
+            System.out.print("Enter new Category name : ");
+            newCatagoryName = scan.nextLine().strip();
+
+            if(newCatagoryName.isBlank()){
+                System.out.printf(ERROR_MSG, "Category can't be empty");
+                valid = false;
+                continue; 
+            }
+        }while(!valid);
+
+        category_array[index] = newCatagoryName;
+
+        //Update the item array
+        for (int i = 0; i < item_array.length; i++) {
+            if(item_array[i][4] == null){
+                continue;   
+            }else{
+                if(item_array[i][4].equals(category_name)){
+                    item_array[i][4] = newCatagoryName;
+                }
+            }
+        }
 
     }
 

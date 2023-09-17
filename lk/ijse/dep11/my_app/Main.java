@@ -122,7 +122,7 @@ public class Main {
             case 2:
                 supplierManage();
             case 3:
-                //stockManage();
+                stockManage();
             case 4:
                 logout();
             case 5:
@@ -508,6 +508,204 @@ public class Main {
         input = temp;
         return input;
     }
+
+
+    //-------------------------- stock manage --------------------------------
+
+    public static void stockManage(){
+
+        clearConsole();
+
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                              STOCK MANAGE                                 |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        System.out.printf("%-48s%-48s\n", "[1] Manage Item Categories", "[2] Add Item");
+        System.out.printf("%-48s%-48s\n", "[3] Get Items Supplier wise", "[4] View Items");
+        System.out.printf("%-48s%-48s\n", "[5] Rank Items Per Unit Price", "[6] Home Page");
+
+        String option;
+        int choice = 0;
+        boolean valid;
+        do{
+            valid = true;
+            System.out.print("\nEnter an Option to continue : ");
+            option = scan.nextLine().strip();
+
+            try{
+                if(option.isBlank()){
+                    System.out.printf(ERROR_MSG, "Option can't be empty");
+                    valid = false;
+                    continue; 
+                }
+                choice = Integer.parseInt(option);
+                if(choice < 0 || choice > 5){
+                    System.out.printf(ERROR_MSG, "Invalid Option, Try again");
+                    valid = false;
+                    continue;
+                }
+
+            }catch (NumberFormatException nfe){
+                System.out.printf(ERROR_MSG, "Please enter a number");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        switch (choice) {
+            case 1:
+                manageItemCategories();
+            case 2:
+                addItem();
+            case 3:
+                getItemSupplierWise();
+            case 4:
+                viewItems();
+            case 5:
+                rankItemsPerUnitPrice();
+            case 6:
+                homepage();
+        }
+    }
+
+    public static void manageItemCategories(){
+
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                          MANAGE ITEM CATEGORY                             |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        System.out.printf("%-48s%-48s\n", "[1] Add New Item Category", "[2] Delete Item Category");
+        System.out.printf("%-48s%-48s\n", "[3] Update Item Category", "[4] Stock Management");
+
+        String option;
+        int choice = 0;
+        boolean valid;
+        do{
+            valid = true;
+            System.out.print("\nEnter an Option to continue : ");
+            option = scan.nextLine().strip();
+
+            try{
+                if(option.isBlank()){
+                    System.out.printf(ERROR_MSG, "Option can't be empty");
+                    valid = false;
+                    continue; 
+                }
+                choice = Integer.parseInt(option);
+                if(choice < 0 || choice > 6){
+                    System.out.printf(ERROR_MSG, "Invalid Option, Try again");
+                    valid = false;
+                    continue;
+                }
+
+            }catch (NumberFormatException nfe){
+                System.out.printf(ERROR_MSG, "Please enter a number");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        switch (choice) {
+            case 1:
+                addNewItemCategory();
+            case 2:
+                //deleteItemCategory();
+            case 3:
+                updateItemCategory();
+            case 4:
+                stockManagement();
+        }
+
+    }
+    public static void stockManagement(){
+        clearConsole();
+        stockManage();
+    }
+    public static void updateItemCategory(){
+        clearConsole();
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                           UPDATE ITEM CATEGORY                            |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+
+    }
+
+    public static void addNewItemCategory(){
+
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                             ADD ITEM CATEGORY                             |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        String category_name = categoryValidAdd();
+        category_array = extendCategoryArray(category_array, category_name);
+
+        System.out.print("Added successfully! Do you want to add another category (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+           addNewItemCategory();
+        }else{
+            manageItemCategories();
+        }
+
+
+    }
+
+    public static String categoryValidAdd(){
+        boolean valid;
+        String value;
+
+        do{
+            valid = true;
+            System.out.print("Enter the new Item Category : ");
+            value = scan.nextLine().strip();
+
+            if(value.isBlank()){
+                System.out.printf(ERROR_MSG, "category can't be empty");
+                valid = false;
+                continue;
+            }
+            for (int i = 0; i < category_array.length; i++) {
+                if(category_array[i].equals(value)){
+                    System.out.printf(ERROR_MSG, "category already exists");
+                    valid = false;
+                    break;
+                }
+            }
+        }while(!valid);
+        return value;
+    }
+
+    public static String[] extendCategoryArray(String[] input, String value){
+        String[] temp = new String[input.length + 1];
+        for (int i = 0; i < input.length; i++) {
+            temp[i] = input[i];
+        }
+        temp[temp.length -1] = value;
+        input = temp;
+        return input;
+    }
+    public static void addItem(){
+
+        
+
+
+    }
+    public static void getItemSupplierWise(){
+
+    }
+    public static void viewItems(){
+
+    }
+    public static void rankItemsPerUnitPrice(){
+
+    }
+
+
     
 
 

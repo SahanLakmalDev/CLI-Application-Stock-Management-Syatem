@@ -691,14 +691,149 @@ public class Main {
     }
     public static void addItem(){
 
-        
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                                ADD ITEM                                   |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
 
+        //Check category list is empty or not
+
+        boolean valid;
+
+        do{
+            valid = true;
+            if(category_array.length == 0){
+                System.out.println("OOPS! It seems that you don't have any item categories in the system.");
+                System.out.print("Do you want to add a new item category (Y/N) : ");
+                String answer = scan.nextLine().strip();
+                if(answer.equalsIgnoreCase("Y")){
+                    addNewItemCategory();
+                }else{
+                    stockManage();
+                }
+                
+            }
+        }while(!valid);
+
+        //Check Supplier List
+        do{
+            valid = true;
+            if(supplier_array.length == 0){
+                System.out.println("OOPS! It seems that you don't have any suppliers in the system.");
+                System.out.print("Do you want to add a new supplier (Y/N) : ");
+                String answer = scan.nextLine().strip();
+                if(answer.equalsIgnoreCase("Y")){
+                    addSupplier();
+                }else{
+                    stockManage();
+                }
+            }
+
+        }while(!valid);
+
+        System.out.print("Item Code : ");
+        String inputted_item_code = scan.nextLine().strip();
+
+        showSupplierList();
+
+        System.out.print("Enter the supplier number : ");
+        String inputted_supplier_number = scan.nextLine().strip();
+
+        showItemCategories();
+
+        System.out.print("Enter the category number : ");
+        String inputted_category_number = scan.nextLine().strip();
+
+        System.out.print("\nDescription : ");
+        String inputted_description = scan.nextLine().strip();
+
+        System.out.print("Unit Price : ");
+        String inputted_unit_price = scan.nextLine().strip();
+
+        System.out.print("Qty On Hand : ");
+        String inputted_qty_on_hand = scan.nextLine().strip();
+
+        //get category name
+        String item_category_name = category_array[Integer.parseInt(inputted_category_number) - 1];
+
+        //get supplier name
+        String item_supplier_id = supplier_array[Integer.parseInt(inputted_supplier_number.substring(2)) - 1][0];
+
+        item_array = extendItemArray(item_array, inputted_item_code, inputted_description, inputted_unit_price, inputted_qty_on_hand, item_category_name, item_supplier_id);
+
+        System.out.print("Added Item successfully! Do you want to add another item (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+           addItem();
+        }else{
+            stockManage();
+        }
+
+
+
+
+
+    }
+    public static void showSupplierList(){
+        System.out.println("Supplier List");
+        System.out.println();
+        final String LINE = "+".concat("-".repeat(15).concat("+").concat("-".repeat(20)).concat("+"));
+        System.out.println(LINE);
+        System.out.printf("|%-15s|%-20s| \n", "SUPPLIER_ID", "SUPPLIER_NAME");
+        System.out.println(LINE);
+
+        for (int i = 0; i < supplier_array.length; i++) {
+            System.out.printf("|%-15s|%-20s| \n", supplier_array[i][0], supplier_array[i][1]);
+        }
+        System.out.println(LINE);
+        System.out.println();
+    }
+
+    public static void showItemCategories(){
+        System.out.println("Item Categories");
+        System.out.println();
+        final String LINE = "+".concat("-".repeat(15).concat("+").concat("-".repeat(20)).concat("+"));
+        System.out.println(LINE);
+        System.out.printf("|%-15s|%-20s| \n", "#", "CATEGORY_NAME");
+        System.out.println(LINE);
+
+        for (int i = 0; i < category_array.length; i++) {
+            System.out.printf("|%-15s|%-20s| \n", i+1, category_array[i]);
+        }
+        System.out.println(LINE);
+        System.out.println();
+    }
+
+    public static String[][] extendItemArray(String[][] input, String code, String des, String unit_price, String qty,
+    String cat_name, String supp_id){
+        String[][] temp = new String[input.length + 1][6];
+        for (int i = 0; i < input.length; i++) {
+            temp[i] = input[i];
+        }
+        temp[temp.length -1][0] = code;
+        temp[temp.length -1][1] = des;
+        temp[temp.length -1][2] = unit_price;
+        temp[temp.length -1][3] = qty;
+        temp[temp.length -1][4] = cat_name;
+        temp[temp.length -1][5] = supp_id;
+
+        input = temp;
+        return input;
 
     }
     public static void getItemSupplierWise(){
 
     }
     public static void viewItems(){
+
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                               VIEW ITEMS                                  |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        
+
 
     }
     public static void rankItemsPerUnitPrice(){

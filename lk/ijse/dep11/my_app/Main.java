@@ -391,9 +391,26 @@ public class Main {
         }else{
             supplierManage();
         }
+    }
+    public static void searchSupplier(){
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                               SEARCH SUPPLIER                              |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
 
+        String supplier_id = idValdationExists();
 
+        System.out.println("Supplier ID : " + supplier_array[index][0]);
+        System.out.println("Supplier Name : " + supplier_array[index][1]);
 
+        System.out.print("Do you want to search another supplier (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+            searchSupplier();
+        }else{
+            supplierManage();
+        }
     }
 
     public static String idValidationAdding(){

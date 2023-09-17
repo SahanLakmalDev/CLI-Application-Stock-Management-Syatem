@@ -611,7 +611,7 @@ public class Main {
             case 1:
                 addNewItemCategory();
             case 2:
-                //deleteItemCategory();
+                deleteItemCategory();
             case 3:
                 updateItemCategory();
             case 4:
@@ -689,6 +689,85 @@ public class Main {
         input = temp;
         return input;
     }
+    public static void deleteItemCategory(){
+
+        clearConsole();
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                           DELETE ITEM CATEGORY                            |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        String category_name = catValidationexists();
+        category_array = shrinkCatArray(category_array, index);
+
+        //Update item array
+        for (int i = 0; i < item_array.length; i++) {
+            if(item_array[i][4].equals(category_name)){
+                item_array[i][4] = null;
+            }
+        }
+
+        System.out.print("Deleted successfully! Do you want to delete another category (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+           deleteItemCategory();
+        }else{
+            supplierManage();
+        }
+
+    }
+
+    public static String catValidationexists(){
+        boolean valid;
+        String value;
+        boolean isExisted;
+
+        do{
+            valid = true;
+            isExisted = false;
+            System.out.print("Enter Item Category : ");
+            value = scan.nextLine().strip();
+
+            if(value.isBlank()){
+                System.out.printf(ERROR_MSG, "category can't be empty");
+                valid = false;
+                continue;
+            }
+            for (int i = 0; i < category_array.length; i++) {
+                if(category_array[i].equals(value)){
+                    index = i;
+                    isExisted = true;
+                    valid = true;
+                    break;
+                }
+            }
+            if(!isExisted){
+                System.out.printf(ERROR_MSG, "category doesn't exist");
+                valid = false;
+                continue;
+            }
+
+        }while(!valid);
+        return value;
+
+    }
+
+    public static String[] shrinkCatArray(String[] input, int index){
+        String[] temp = new String[input.length -1];
+        for (int i = 0; i < input.length; i++) {
+            if(i < index){
+                temp[i] = input[i];
+            }else if(i == index){
+                continue;
+            }else{
+                temp[i-1] = input[i];
+            }
+        }
+        input = temp;
+        return input;
+    }
+
     public static void addItem(){
 
         clearConsole();

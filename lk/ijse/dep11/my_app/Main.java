@@ -257,7 +257,7 @@ public class Main {
             case 4:
                 viewSuppliers();
             case 5:
-                //searchSupplier();
+                searchSupplier();
             case 6:
                 homepage();
         }
@@ -374,6 +374,26 @@ public class Main {
     }
     public static void deleteSupplier(){
 
+        clearConsole();
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                              DELETE SUPPLIER                              |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        String supplier_id = idValdationExists();
+        supplier_array = shrinkSupplierArray(supplier_array, index);
+
+        System.out.print("Deleted successfully! Do you want to delete another supplier (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+            deleteSupplier();
+        }else{
+            supplierManage();
+        }
+
+
+
     }
 
     public static String idValidationAdding(){
@@ -452,6 +472,22 @@ public class Main {
         }
         temp[temp.length -1][0] = id;
         temp[temp.length -1][1] = name;
+        input = temp;
+        return input;
+    }
+
+    public static String[][] shrinkSupplierArray(String[][] input, int index){
+        String[][] temp = new String[input.length -1][2];
+
+        for (int i = 0; i < input.length; i++) {
+            if(i < index){
+                temp[i] = input[i];
+            }else if(i == index){
+                continue;
+            }else{
+                temp[i-1] = input[i];
+            }
+        }
         input = temp;
         return input;
     }

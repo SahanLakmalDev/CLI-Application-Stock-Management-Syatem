@@ -120,51 +120,30 @@ First, clone this repository to your local machine using [Git](https://git-scm.c
 
 ```bash
 git clone https://github.com/yourusername/ijse-stock-management.git
+```
 
 # Contributing
 
-Contributions to the IJSE Stock Management System project are highly encouraged and appreciated! If you'd like to contribute, please follow these guidelines:
+Contributions to the IJSE Stock Management System are welcome! Here's how you can contribute:
 
-1. **Fork the Repository**: Start by forking this repository to your GitHub account. You can do this by clicking the "Fork" button at the top right corner of the repository's page.
+1. Fork the repository to your GitHub account.
 
-2. **Clone the Forked Repository**: After forking, clone your forked repository to your local machine using the `git clone` command. Replace `yourusername` with your actual GitHub username.
+2. Clone your forked repository to your local machine.
 
-    ```bash
-    git clone https://github.com/yourusername/ijse-stock-management.git
-    ```
+3. Create a new branch for your contribution:
 
-3. **Create a New Branch**: Before making any changes, create a new branch for your work. Use a descriptive name for your branch that summarizes the purpose of your changes.
+   ```bash
+   git checkout -b feature/new-feature
+   ```
+4. Make your changes and commit them with clear messages.
 
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
+5. Push your changes to your fork.
 
-4. **Make Changes**: Make your desired changes and improvements to the codebase. Ensure that your code follows the project's coding standards and conventions.
+6. Create a pull request (PR) to the original repository.
 
-5. **Test Your Changes**: Thoroughly test your changes to make sure they work as expected and do not introduce any regressions.
+7. Collaborate with project maintainers and address feedback.
 
-6. **Commit Your Changes**: Commit your changes with clear and concise commit messages. Use present tense and provide a brief summary of your changes.
-
-    ```bash
-    git commit -m "Add feature: description of your changes"
-    ```
-
-7. **Push to Your Fork**: Push your changes to your forked repository on GitHub.
-
-    ```bash
-    git push origin feature/your-feature-name
-    ```
-
-8. **Create a Pull Request**: Go to the original repository on GitHub and click the "New Pull Request" button. Provide a clear title and description for your pull request, explaining the purpose of your changes.
-
-9. **Code Review**: Your pull request will be reviewed by project maintainers. Be prepared to address any feedback or suggestions for improvement.
-
-10. **Merge and Celebrate**: Once your pull request is approved, it will be merged into the main project. Congratulations on your contribution!
-
-Please note that by contributing to this project, you agree to follow the [code of conduct](CODE_OF_CONDUCT.md). Be respectful and considerate of others throughout the contribution process.
-
-Thank you for contributing to the IJSE Stock Management System! Your contributions help make this project better for everyone.
-
+8. Once your PR is approved, it will be merged into the main project.
 
 # Version
 0.1.0

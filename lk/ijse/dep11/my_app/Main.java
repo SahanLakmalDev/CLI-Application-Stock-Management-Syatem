@@ -961,10 +961,6 @@ public class Main {
         }else{
             stockManage();
         }
-
-
-
-
     }
     public static void viewItems(){
 
@@ -1040,16 +1036,6 @@ public class Main {
 
 
     }
-
-
-    
-
-
-
-
-
-
-
     private final static void clearConsole() {
         final String os = System.getProperty("os.name");
         try {
@@ -1066,9 +1052,5 @@ public class Main {
             System.err.println(e.getMessage());
         }
     }
-
-
-
-
 
 }

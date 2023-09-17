@@ -832,6 +832,31 @@ public class Main {
         System.out.println("|                               VIEW ITEMS                                  |");
         System.out.println("+---------------------------------------------------------------------------+\n");
 
+        for (int i = 0; i < category_array.length; i++) {
+            System.out.println(category_array[i] + " : ");
+
+            System.out.println();
+
+            final String LINE = "+".concat("-".repeat(15).concat("+").concat("-".repeat(20)).concat("+").concat("-".repeat(20).concat("+").concat("-".repeat(20).concat("+").concat("-".repeat(20).concat("+")))));
+            System.out.println(LINE);
+            System.out.printf("|%-15s|%-20s|%-20s|%-20s|%-20s| \n", "SID", "CODE", "DESC", "PRICE", "QTY");
+            System.out.println(LINE);
+
+            for (int j = 0; j < item_array.length; j++) {
+                if(category_array[i].equals(item_array[j][4])){
+                    System.out.printf("|%-15s|%-20s|%-20s|%-20s|%-20s| \n", item_array[j][5], item_array[j][0],
+                    item_array[j][1], item_array[j][2], item_array[j][3]);
+                }
+            }
+            System.out.println(LINE);
+        }
+        System.out.print("Do you want to go stock manage page (Y/N) : ");
+        String option = scan.nextLine();
+
+        if (option.equals("y") || option.equals("Y")) {
+            stockManagement();
+        }
+
         
 
 

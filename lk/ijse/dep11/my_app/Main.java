@@ -85,6 +85,7 @@ public class Main {
         System.out.println("[5] Exit the system ");
 
         String option;
+        int choice = 0;
         boolean valid;
         do{
             valid = true;
@@ -97,7 +98,7 @@ public class Main {
                     valid = false;
                     continue; 
                 }
-                int choice = Integer.parseInt(option);
+                choice = Integer.parseInt(option);
                 if(choice < 0 || choice > 5){
                     System.out.printf(ERROR_MSG, "Invalid Option, Try again");
                     valid = false;
@@ -110,9 +111,107 @@ public class Main {
                 continue;
             }
         }while(!valid);
-    }
 
-     private final static void clearConsole() {
+        switch (choice) {
+            case 1:
+                changeTheCredentials();
+            case 2:
+                //supplierManage();
+            case 3:
+                //stockManage();
+            case 4:
+                logout();
+            case 5:
+                exitTheSystem();
+        }
+    }
+   
+    public static void exitTheSystem(){
+        clearConsole();
+        System.exit(0);
+    }
+    public static void logout(){
+        clearConsole();
+        loadLoginPage();
+    }
+    public static void changeTheCredentials(){
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                            CREDENTIAL MANAGE                              |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        //Verifying the user
+
+        boolean valid;
+        do{
+            valid = true;
+            System.out.print("Please enter the username to verify it's you : ");
+            String inputted_username = scan.nextLine().strip();
+            if(inputted_username.isBlank()){
+                System.out.printf(ERROR_MSG, "Username can't be empty");
+                valid = false;
+                continue;
+            }
+            if(!inputted_username.equalsIgnoreCase(username)){
+                System.out.printf(ERROR_MSG, "Invalid Username");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        System.out.println("Hey " + username);
+
+        do{
+            valid = true;
+            System.out.print("Enter your current password : ");
+            String inputted_password = scan.nextLine().strip();
+            if(inputted_password.isBlank()){
+                System.out.printf(ERROR_MSG, "Password can't be empty");
+                valid = false;
+                continue;
+            }
+            if(!inputted_password.equals(password)){
+                System.out.printf(ERROR_MSG, "Invalid Password");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+        String new_password;
+        do{
+            valid = true;
+            System.out.print("Enter your new password : ");
+            new_password = scan.nextLine().strip();
+
+            if(new_password.isBlank()){
+                System.out.printf(ERROR_MSG, "Password can't be empty");
+                valid = false;
+                continue; 
+            }
+            if(new_password.length() < 4){
+                System.out.printf(ERROR_MSG, "Invalid Password format");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        password = new_password;
+
+        System.out.println("Password changed successfully! Do you want to go home page (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equals("y") || answer.equals("Y")) {
+            dashboard();
+        }
+    
+    }
+    
+
+
+
+
+
+
+    private final static void clearConsole() {
         final String os = System.getProperty("os.name");
         try {
             if (os.equals("Linux")) {

@@ -347,7 +347,29 @@ public class Main {
 
     }
     public static void viewSuppliers(){
-        
+
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                              VIEW SUPPLIERS                               |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        final String LINE = "+".concat("-".repeat(15).concat("+").concat("-".repeat(20)).concat("+"));
+        System.out.println(LINE);
+        System.out.printf("|%-15s|%-20s| \n", "SUPPLIER_ID", "SUPPLIER_NAME");
+        System.out.println(LINE);
+
+        for (int i = 0; i < supplier_array.length; i++) {
+            System.out.printf("|%-15s|%-20s| \n", supplier_array[i][0], supplier_array[i][1]);
+        }
+        System.out.println(LINE);
+        System.out.print("\nDo you want to go supplier manage page (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+            supplierManage();
+        }
+
+
 
     }
     public static void deleteSupplier(){

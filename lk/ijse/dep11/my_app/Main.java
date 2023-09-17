@@ -23,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         loadLoginPage();
+        dashboard();
 
     }
 
@@ -69,9 +70,65 @@ public class Main {
                 continue;
             }
         }while(!valid);
+        dashboard();
 
-        
     }
+
+    public static void dashboard(){
+        clearConsole();
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                 WELCOME TO IJSE STOCK MANAGEMENT SYSTEM                   |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        System.out.printf("%-48s%-48s\n", "[1] Change the credentials", "[2] Supplier Manage");
+        System.out.printf("%-48s%-48s\n", "[3] Stock Manage", "[4] Logout");
+        System.out.println("[5] Exit the system ");
+
+        String option;
+        boolean valid;
+        do{
+            valid = true;
+            System.out.print("\nEnter an Option to continue : ");
+            option = scan.nextLine().strip();
+
+            try{
+                if(option.isBlank()){
+                    System.out.printf(ERROR_MSG, "Option can't be empty");
+                    valid = false;
+                    continue; 
+                }
+                int choice = Integer.parseInt(option);
+                if(choice < 0 || choice > 5){
+                    System.out.printf(ERROR_MSG, "Invalid Option, Try again");
+                    valid = false;
+                    continue;
+                }
+
+            }catch (NumberFormatException nfe){
+                System.out.printf(ERROR_MSG, "Please enter a number");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+    }
+
+     private final static void clearConsole() {
+        final String os = System.getProperty("os.name");
+        try {
+            if (os.equals("Linux")) {
+                System.out.print("\033\143");
+            } else if (os.equals("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+        //handle the exception
+            System.err.println(e.getMessage());
+        }
+    }
+
 
 
 

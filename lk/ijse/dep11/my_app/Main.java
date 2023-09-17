@@ -824,6 +824,41 @@ public class Main {
     }
     public static void getItemSupplierWise(){
 
+        clearConsole();
+
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("|                            SEARCH SUPPLIER                                |");
+        System.out.println("+---------------------------------------------------------------------------+\n");
+
+        String supplier_id = idValdationExists();
+        System.out.println(supplier_id);
+        System.out.println(supplier_array[index][1]);
+
+        final String LINE = "+".concat("-".repeat(15).concat("+").concat("-".repeat(20)).concat("+").concat("-".repeat(20).concat("+").concat("-".repeat(20).concat("+").concat("-".repeat(20).concat("+")))));
+        System.out.println(LINE);
+        System.out.printf("|%-15s|%-20s|%-20s|%-20s|%-20s| \n", "ITEM CODE", "DESC", "UNIT PRICE", "QTY", "CATEGORY");
+        System.out.println(LINE);
+
+        for (int i = 0; i < item_array.length; i++) {
+            if(item_array[i][5].equals(supplier_id)){
+                System.out.printf("|%-15s|%-20s|%-20s|%-20s|%-20s| \n", item_array[i][0], item_array[i][1],
+                item_array[i][2], item_array[i][3],item_array[i][4]);
+            }
+        }
+        System.out.println(LINE);
+
+        System.out.print("Do you want to search another supplier (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+           getItemSupplierWise();
+        }else{
+            stockManage();
+        }
+
+
+
+
     }
     public static void viewItems(){
 
@@ -862,6 +897,13 @@ public class Main {
 
     }
     public static void rankItemsPerUnitPrice(){
+
+        //Sort the item array - Bubble sort
+
+        for (int i = 0; i < item_array.length; i++) {
+            
+        }
+
 
     }
 

@@ -14,7 +14,9 @@ public class Main {
 
     static String[] category_array = new String[0];
 
-    static String[][] item_array = new String[0][6];  
+    static String[][] item_array = new String[0][6]; 
+    
+    static int index;
 
     final static String COLOR_BLUE_BOLD = "\033[34;1m";
     final static String COLOR_RED_BOLD = "\033[31;1m";
@@ -314,9 +316,38 @@ public class Main {
         System.out.println("|                              UPDATE SUPPLIER                              |");
         System.out.println("+---------------------------------------------------------------------------+\n");
 
+        String supplier_id = idValdationExists();
+        System.out.println("Supplier Name : " + supplier_array[index][1]);
+
+        boolean valid;
+        String newsupplier_name;
+        do{
+            valid = true;
+            System.out.print("Enter New Supiler Name : ");
+            newsupplier_name= scan.nextLine().strip();
+
+            if(newsupplier_name.isBlank()){
+                System.out.printf(ERROR_MSG, "Supplier Name can't be empty");
+                valid = false;
+                continue;
+            }
+
+        }while(!valid);
+
+        supplier_array[index][1] = newsupplier_name;
+        System.out.print("Updated successfully! Do you want to update another supplier (Y/N) : ");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("Y")) {
+            updateSupplier();
+        }else{
+            supplierManage();
+        }
+
 
     }
     public static void viewSuppliers(){
+        
 
     }
     public static void deleteSupplier(){
@@ -355,6 +386,40 @@ public class Main {
         }while(!valid);
         return value;
 
+    }
+
+    public static String idValdationExists(){
+        boolean valid;
+        String value;
+
+        boolean isExisted;
+
+        do{
+            valid = true;
+            isExisted = false;
+            System.out.print("Enter Supplier Id : ");
+            value = scan.nextLine().strip();
+
+            if(value.isBlank()){
+                System.out.printf(ERROR_MSG, "ID can't be empty");
+                valid = false;
+                continue;
+            }
+            for (int i = 0; i < supplier_array.length; i++) {
+                if(supplier_array[i][0].equals(value)){
+                    isExisted = true;
+                    index = i;
+                    break;
+                }
+            }
+            if(!isExisted){
+                System.out.printf(ERROR_MSG,"ID doesn't exists");
+                valid = false;
+                continue;
+                
+            }
+        }while(!valid);
+        return value;
     }
 
     public static String[][] extendSupplierArray(String[][] input, String id, String name){
